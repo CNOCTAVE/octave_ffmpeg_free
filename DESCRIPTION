@@ -1,0 +1,10 @@
+Name: octave_ffmpeg_free
+Version: 0.1.0
+Date: 2024-12-3
+Author: various authors
+Maintainer: Yu Hongbo <yuhongbo@member.fsf.org>, CNOCTAVE <cnoctave@qq.com>
+Title: Octave FFmpeg Free
+Description: The octave_ffmpeg_free package provides functions depending on ffmpeg-free.
+Depends: octave (>= 8.0.0)
+License: GPLv3+
+Url: https://github.com/CNOCTAVE/octave_ffmpeg_free

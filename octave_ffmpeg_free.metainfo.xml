@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright 2024 Yu Hongbo <yuhongbo@member.fsf.org>, 
+  CNOCTAVE <cnoctave@qq.com>
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.  This file is offered as-is,
+without any warranty.
+-->
+<component type="addon">
+  <id>octave_ffmpeg_free</id>
+  <extends>www.octave.org-octave.desktop</extends>
+  <name>octave_ffmpeg_free</name>
+  <summary>Process file depending on ffmpeg-free</summary>
+  <description>
+    <p>The octave_ffmpeg_free package provides functions 
+      depending on ffmpeg-free.</p>
+  </description>
+    <keywords>
+    <keyword>MP3</keyword>
+    <keyword>process</keyword>
+  </keywords>
+  <url type="homepage">https://github.com/CNOCTAVE/octave_ffmpeg_free</url>
+  <url type="bugtracker">https://github.com/CNOCTAVE/octave_ffmpeg_free/issues</url>
+  <url type="document">https://cnoctave.github.io/octave_ffmpeg_free/index.html</url>
+  <project_license>GPL-3.0+</project_license>
+  <developer_name>various authors</developer_name>
+  <update_contact>cnoctave@qq.com</update_contact>
+  <metadata_license>FSFAP</metadata_license>
+</component>

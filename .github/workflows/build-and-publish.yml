@@ -1,0 +1,24 @@
+# This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
+# For more information see: https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages
+
+name: Build and Publish
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  linux-build:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GH_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: 'octave_ffmpeg_free'
+      # uncomment this on demand
+      - run: sudo chmod a+x octave_ffmpeg_free/src/configure
+      # uncomment this on demand
+      - run: sudo chmod -R a+x octave_ffmpeg_free/inst
+      - run: tar --warning=no-file-changed --exclude='octave_ffmpeg_free/.git' --exclude='octave_ffmpeg_free/.github' -czvf octave_ffmpeg_free.tar.gz octave_ffmpeg_free
+      - run: gh release upload 0.1.0 octave_ffmpeg_free.tar.gz --repo $GITHUB_REPOSITORY

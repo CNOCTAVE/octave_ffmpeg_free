@@ -1,0 +1,11 @@
+octave_ffmpeg_free >> Process file depending on ffmpeg-free
+ffmpeg-free avformat.h
+ av_dump_format
+Metadata
+ ffmpeg_get_metadata
+ ffmpeg_get_album
+ ffmpeg_get_artist
+ ffmpeg_get_attr
+ ffmpeg_get_tagging_time
+ ffmpeg_get_title
+ ffmpeg_get_TYER

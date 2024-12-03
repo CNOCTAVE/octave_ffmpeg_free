@@ -1,0 +1,25 @@
+FLAGGED_MKOCTFILE = @MKOCTFILE@ @XTRA_CXXFLAGS@ @CXXFLAGS@
+
+## We can't link oct files, and Octave's package system does not handle
+## shared libraries. Because of this, we need to create object files for
+## our "shared" libraries and statically link to selected oct files.
+
+OCT_FILES = ffmpeg_get_metadata.oct av_dump_format.oct
+
+M_FILES = @M_FILES@
+
+CC_FILES = $(patsubst %.oct, %.cc, ${OCT_FILES})
+
+all: ${OCT_FILES} ${M_FILES}
+
+%.o: %.cc %.h
+	$(FLAGGED_MKOCTFILE) -c $<
+
+%.oct: %.cc
+	$(FLAGGED_MKOCTFILE) $< -I/usr/include/ffmpeg -lavformat -lavcodec -lavutil -lswresample
+
+%.m: %.m.in
+	cp $< $@
+
+clean:
+	$(RM) *.o octave-core octave-workspace *~ ${M_FILES} ${OCT_FILES}
