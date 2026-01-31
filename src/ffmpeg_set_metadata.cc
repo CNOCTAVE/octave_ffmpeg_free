@@ -28,21 +28,26 @@ extern "C" {
 #include <octave/ov-base.h>
 
 
-DEFUN_DLD (ffmpeg_get_metadata, args, , "\
+DEFUN_DLD (ffmpeg_set_metadata, args, , "\
 -*- texinfo -*-\n\
-@deftypefn {Loadable Function} @var{metadata} = ffmpeg_get_metadata(@var{input_filename})\n\
-Input mp3 filename @var{input_filename}, return @var{metadata}.\n\
+@deftypefn {Loadable Function} @var{metadata} = ffmpeg_set_metadata(@var{input_filename}, @var{metadata_dict})\n\
+Input mp3 filename @var{input_filename} and metadata dictionary (ID3 dict) @var{metadata_dict},\n\
+set metadata for the file.\n\
 @end deftypefn\n\
 ")
 {
   octave_value retval;
-  if (args.length () != 1)
+  if (args.length () != 2)
     print_usage ();
   if (! args(0).is_string ())
-    error ("ffmpeg_get_metadata: input_filename should be a string");
+    error ("ffmpeg_set_metadata: input_filename should be a string");
   if (args(0).isempty ())
-    error ("ffmpeg_get_metadata: input_filename should not be empty");
+    error ("ffmpeg_set_metadata: input_filename should not be empty");
+  if (! args(1).isstruct ())
+    error ("ffmpeg_set_metadata: metadata_dict should be a map");
   const char* input_filename = args(0).string_value ().c_str ();
+
+  octave_map metadata = args(1).map_value ();
 
   AVFormatContext* formatContext = nullptr;
   // Open input file, and allocate format context for the input file
@@ -57,15 +62,24 @@ Input mp3 filename @var{input_filename}, return @var{metadata}.\n\
     error ("Could not find stream information");
   }
 
-  // 创建一个 octave_map 来存储元数据
-  octave_map metadata;
-
   // 遍历 AVFormatContext 的元数据
-  AVDictionaryEntry* tag = nullptr;
-  while ((tag = av_dict_get(formatContext->metadata, "", tag, AV_DICT_IGNORE_SUFFIX))) {
-    std::string entry = std::string(tag->key) + ": " + std::string(tag->value);
-    metadata.setfield(std::string(tag->key), Cell(octave_value(std::string(tag->value))));
+  string_vector keys = metadata.keys();
+
+  try{
+    for (int i = 0; i < keys.numel (); ++i)
+    {
+      std::string key = keys(i);
+      octave_idx_type r = 0, c = 0;
+      Cell C = metadata.getfield(key);
+      const octave_value &v = C.elem(r, c);
+      std::string val = v.string_value();
+      av_dict_set(&(formatContext->metadata), key.c_str(), val.c_str(), 0);
+    }
+  } catch (const std::exception& e) {
+    error ("%s", e.what());
+    av_dict_free(&(formatContext->metadata));
   }
+  av_dict_free(&(formatContext->metadata));
 
   // Find the first audio stream
   AVCodecParameters* codecParameters = nullptr;

@@ -15,24 +15,25 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn  {Function File} {@var{ret} =} ffmpeg_get_attr (@var{input_filename})
-## Get any attribute of media file.
-## Input filename and attribute name.
+## @deftypefn  {Function File} {@var{ret} =} ffmpeg_get_default_id3_metadata ()
+## Get default ID3 metadata for creating or modifing media file.
 ##
 ## @end deftypefn
 
-function ret = ffmpeg_get_attr (input_filename, attribute_name)
-  if (nargin != 1)
-    print_usage ();
-  endif
-  if (!ischar(input_filename))
-    print_usage ();
-  endif
-  metadata = ffmpeg_get_metadata(input_filename);
-  try
-    ret = metadata.(attribute_name);
-  catch
-    # fallback to empty string
-    ret = "";
-  end_try_catch
+function ret = ffmpeg_get_default_id3_metadata ()
+  ret = struct ();
+  ret.album_artist = "Unknown Album Artist";
+  ret.album = "Unknown Album";
+  ret.artist = "Unknown Artist";
+  ret.comment = "Unknown Comment";
+  ret.composer = "Unknown Composer";
+  ret.date = "Unknown Date";
+  ret.disc = "0";
+  ret.genre = "Unknown Genre";
+  ret.language = "Unknown Language";
+  ret.mood = "Unknown Mood";
+  ret.("set") = "Unknown Set";
+  ret.subtitle = "Unknown Subtitle";
+  ret.title = "Unknown Title";
+  ret.track = "0";
 endfunction

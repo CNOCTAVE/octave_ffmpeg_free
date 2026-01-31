@@ -3,9 +3,39 @@ ffmpeg-free avformat.h
  av_dump_format
 Metadata
  ffmpeg_get_metadata
- ffmpeg_get_album
- ffmpeg_get_artist
+ ffmpeg_set_metadata
+ ffmpeg_get_default_id3_metadata
  ffmpeg_get_attr
  ffmpeg_get_tagging_time
+ ffmpeg_get_album_artist
+ ffmpeg_get_album
+ ffmpeg_get_artist
+ ffmpeg_get_comment
+ ffmpeg_get_composer
+ ffmpeg_get_date
+ ffmpeg_get_disc
+ ffmpeg_get_genre
+ ffmpeg_get_language
+ ffmpeg_get_mood
+ ffmpeg_get_set
+ ffmpeg_get_subtitle
  ffmpeg_get_title
+ ffmpeg_get_track
  ffmpeg_get_TYER
+ ffmpeg_get_pixel_format
+ ffmpeg_get_video_size
+ ffmpeg_set_id3_struct_attr
+ ffmpeg_set_id3_struct_album_artist
+ ffmpeg_set_id3_struct_album
+ ffmpeg_set_id3_struct_artist
+ ffmpeg_set_id3_struct_comment
+ ffmpeg_set_id3_struct_composer
+ ffmpeg_set_id3_struct_date
+ ffmpeg_set_id3_struct_disc
+ ffmpeg_set_id3_struct_genre
+ ffmpeg_set_id3_struct_language
+ ffmpeg_set_id3_struct_mood
+ ffmpeg_set_id3_struct_set
+ ffmpeg_set_id3_struct_subtitle
+ ffmpeg_set_id3_struct_title
+ ffmpeg_set_id3_struct_track

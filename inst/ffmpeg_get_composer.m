@@ -15,13 +15,12 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn  {Function File} {@var{ret} =} ffmpeg_get_attr (@var{input_filename})
-## Get any attribute of media file.
-## Input filename and attribute name.
+## @deftypefn  {Function File} {@var{ret} =} ffmpeg_get_composer (@var{input_filename})
+## Get composer of media file.
 ##
 ## @end deftypefn
 
-function ret = ffmpeg_get_attr (input_filename, attribute_name)
+function ret = ffmpeg_get_composer (input_filename)
   if (nargin != 1)
     print_usage ();
   endif
@@ -30,7 +29,7 @@ function ret = ffmpeg_get_attr (input_filename, attribute_name)
   endif
   metadata = ffmpeg_get_metadata(input_filename);
   try
-    ret = metadata.(attribute_name);
+    ret = metadata.composer;
   catch
     # fallback to empty string
     ret = "";

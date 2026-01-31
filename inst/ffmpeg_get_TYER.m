@@ -1,4 +1,4 @@
-## Copyright (C) 2024 Yu Hongbo <yuhongbo@member.fsf.org>, 
+## Copyright (C) 2024-2026 Yu Hongbo <yuhongbo@member.fsf.org>, 
 ##                    CNOCTAVE <cnoctave@qq.com>
 ##
 ## This program is free software; you can redistribute it and/or modify it under
@@ -22,6 +22,9 @@
 
 function ret = ffmpeg_get_TYER (input_filename)
   if (nargin != 1)
+    print_usage ();
+  endif
+  if (!ischar(input_filename))
     print_usage ();
   endif
   metadata = ffmpeg_get_metadata(input_filename);

@@ -4,7 +4,7 @@ FLAGGED_MKOCTFILE = @MKOCTFILE@ @XTRA_CXXFLAGS@ @CXXFLAGS@
 ## shared libraries. Because of this, we need to create object files for
 ## our "shared" libraries and statically link to selected oct files.
 
-OCT_FILES = ffmpeg_get_metadata.oct av_dump_format.oct
+OCT_FILES = ffmpeg_get_metadata.oct ffmpeg_set_metadata.oct av_dump_format.oct
 
 M_FILES = @M_FILES@
 

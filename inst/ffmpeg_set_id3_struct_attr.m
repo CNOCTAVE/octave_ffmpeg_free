@@ -15,24 +15,26 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn  {Function File} {@var{ret} =} ffmpeg_get_attr (@var{input_filename})
-## Get any attribute of media file.
-## Input filename and attribute name.
+## @deftypefn  {Function File} {@var{ret} =} ffmpeg_set_id3_struct_attr 
+## (@var{id3_struct}, @var{attr}, @var{value})
+## Set any attribute of ID3 struct.
+## attr value should be a string.
+## value value should be a string.
 ##
 ## @end deftypefn
-
-function ret = ffmpeg_get_attr (input_filename, attribute_name)
-  if (nargin != 1)
+  
+function id3_struct = ffmpeg_set_id3_struct_attr (id3_struct, attr, value)
+  if (nargin != 3)
     print_usage ();
   endif
-  if (!ischar(input_filename))
+  if (!isstruct(id3_struct))
     print_usage ();
   endif
-  metadata = ffmpeg_get_metadata(input_filename);
-  try
-    ret = metadata.(attribute_name);
-  catch
-    # fallback to empty string
-    ret = "";
-  end_try_catch
+  if (!ischar(attr))
+    print_usage ();
+  endif
+  if (!ischar(value))
+    print_usage ();
+  endif
+  id3_struct.(attr) = value;
 endfunction
