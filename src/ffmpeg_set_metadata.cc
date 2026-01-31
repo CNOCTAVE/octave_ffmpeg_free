@@ -76,8 +76,8 @@ set metadata for the file.\n\
       av_dict_set(&(formatContext->metadata), key.c_str(), val.c_str(), 0);
     }
   } catch (const std::exception& e) {
-    error ("%s", e.what());
-    av_dict_free(&(formatContext->metadata));
+    warning ("some key/value pairs may not be set");
+    warning ("%s", e.what());
   }
   av_dict_free(&(formatContext->metadata));
 
